@@ -1,0 +1,434 @@
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio TKJ - Mizukiyu</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --primary: #06b6d4;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --text-light: #f8fafc;
+            --text-gray: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
+        }
+
+        /* Control Panel / Edit Toggle */
+        .admin-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-edit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+        }
+
+        /* Header & Nav */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Hero / Landing Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .badge-tkj {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-text h1 span {
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        /* Image Profile Container */
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .img-box {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            padding: 8px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background: var(--bg-color);
+        }
+
+        .change-photo-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Social Media Links */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-btn.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .social-btn.tiktok { background: #000000; border: 1px solid #25f4ee; }
+        .social-btn.youtube { background: #ff0000; }
+
+        .social-btn:hover {
+            transform: translateY(-50px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            transform: translateY(-5px);
+        }
+
+        /* TKJ & Skills Section */
+        .section {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.2);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Editable Highlight Style */
+        [contenteditable="true"] {
+            outline: 2px dashed var(--accent);
+            padding: 2px 4px;
+            border-radius: 4px;
+            background: rgba(236, 72, 153, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 40px;
+            }
+
+            .hero-text p {
+                margin: 0 auto 30px;
+            }
+
+            .social-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Control Edit Button -->
+    <div class="admin-controls">
+        <button class="btn-edit" onclick="toggleEditMode()">
+            <i class="fa-solid fa-pen-to-square"></i> <span id="edit-text">Mode Edit</span>
+        </button>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header>
+        <div class="logo" contenteditable="false">Mizukiyu.</div>
+    </header>
+
+    <!-- Main Landing / Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <span class="badge-tkj" contenteditable="false"><i class="fa-solid fa-network-wired"></i> Network & IT Enthusiast</span>
+            <h1 contenteditable="false">Halo, Saya <span>Mizukiyu</span></h1>
+            <p contenteditable="false">Siswa / Praktisi **Teknik Komputer dan Jaringan (TKJ)** yang berfokus pada konfigurasi jaringan, administrasi server, instalasi LAN/WAN, serta keamanan siber.</p>
+            
+            <!-- Social Media Buttons -->
+            <div class="social-links">
+                <a href="https://www.instagram.com/bim.s7?igsh=NnB1Y3J6em9rajV2" target="_blank" class="social-btn instagram">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://www.tiktok.com/@mizukiyu.ch?_r=1&_t=ZS-98EVVUkb3Fk" target="_blank" class="social-btn tiktok">
+                    <i class="fa-brands fa-tiktok"></i> TikTok
+                </a>
+                <a href="https://youtube.com/@mizukiyu_ch?si=0rNFQnHnFs4EuZ-h" target="_blank" class="social-btn youtube">
+                    <i class="fa-brands fa-youtube"></i> YouTube
+                </a>
+            </div>
+        </div>
+
+        <!-- Photo Section -->
+        <div class="hero-image">
+            <div class="img-box">
+                <!-- Foto Default (Bisa diganti lewat Tombol Edit) -->
+                <img id="profile-img" src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?auto=format&fit=crop&w=600&q=80" alt="Foto Profil">
+                <button class="change-photo-btn" id="photo-btn" onclick="document.getElementById('upload-photo').click()">
+                    <i class="fa-solid fa-camera"></i>
+                </button>
+                <input type="file" id="upload-photo" accept="image/*" style="display: none;" onchange="changeImage(event)">
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang TKJ & Keahlian Section -->
+    <section class="section">
+        <h2 class="section-title" contenteditable="false">Spesialisasi TKJ</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <i class="fa-solid fa-server"></i>
+                <h3 contenteditable="false">Computer Networking</h3>
+                <p contenteditable="false">Mampu merancang dan mengonfigurasi jaringan LAN, WAN, VLAN, serta routing menggunakan perangkat MikroTik dan Cisco.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-terminal"></i>
+                <h3 contenteditable="false">Server Administration</h3>
+                <p contenteditable="false">Pengalaman dalam instalasi dan pengelolaan OS Server berbasis Linux (Debian/Ubuntu) untuk Web Server, DNS, DHCP, dan FTP.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-wifi"></i>
+                <h3 contenteditable="false">Wireless & Fiber Optic</h3>
+                <p contenteditable="false">Memahami instalasi jaringan nirkabel (Wi-Fi) serta penyambungan kabel Serat Optik (Fiber Optic) dengan Splicer.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3 contenteditable="false">Network Security</h3>
+                <p contenteditable="false">Memahami konsep dasar keamanan jaringan, firewall, penyaringan IP, serta monitoring lalu lintas jaringan.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p contenteditable="false">&copy; 2026 Mizukiyu Portofolio TKJ. Designed with passion for Networking & IT.</p>
+    </footer>
+
+    <!-- JavaScript for Live Editing -->
+    <script>
+        let isEditing = false;
+
+        function toggleEditMode() {
+            isEditing = !isEditing;
+            const editables = document.querySelectorAll('[contenteditable]');
+            const photoBtn = document.getElementById('photo-btn');
+            const editText = document.getElementById('edit-text');
+
+            editables.forEach(el => {
+                el.contentEditable = isEditing ? "true" : "false";
+            });
+
+            if (isEditing) {
+                photoBtn.style.display = "flex";
+                editText.innerText = "Simpan Mode";
+                alert("Mode Edit Aktif! Silakan klik pada teks untuk mengubahnya, atau klik ikon kamera di foto untuk mengganti foto profil.");
+            } else {
+                photoBtn.style.display = "none";
+                editText.innerText = "Mode Edit";
+                alert("Perubahan telah disimpan di tampilan layar Anda!");
+            }
+        }
+
+        function changeImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('profile-img');
+                output.src = reader.result;
+            };
+            if(event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>
